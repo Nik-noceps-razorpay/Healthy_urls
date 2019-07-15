@@ -10,6 +10,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/robfig/cron"
+
+
 )
 
 var wg sync.WaitGroup
@@ -56,6 +59,9 @@ func init() {
 	// fmt.Println("Creating UrlHits table")
 	db.AutoMigrate(&UrlHits{})
 
+	c := cron.New()
+	c.AddFunc("*/1 * * * *", healthCheckUp)
+	c.Start()
 
 }
 
@@ -69,7 +75,6 @@ func main() {
 	{
 		v1.POST("/", createUrl)
 		v1.GET("/", fetchAllUrl)
-		v1.GET("/healthcheckups", healthCheckUp)
 
 		// 	v1.GET("/:id", fetchSingleUrl)
 		// 	v1.PUT("/:id", updateUrl)
@@ -118,13 +123,13 @@ func fetchAllUrl(c *gin.Context) {
 
 }
 
-func healthCheckUp(c *gin.Context) {
+func healthCheckUp() {
 	var urls []Url
 
 	db.Find(&urls)
 
 	if len(urls) <= 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No urls found!, kindly insert some urls."})
+		fmt.Println( "No urls found!, kindly insert some urls.")
 		return
 	}
 	wg.Add(len(urls))

@@ -1,6 +1,10 @@
 package Routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"Controllers"
+	"github.com/gin-gonic/gin"
+)
+
 
 func Router() {
 
@@ -8,9 +12,9 @@ func Router() {
 
 	v1 := router.Group("/CRUD")
 	{
-		v1.POST("/", createUrl)
-		v1.GET("/", fetchAllUrl)
-		v1.GET("/:id", fetchUrlLog)
+		v1.POST("/", Controllers.CreateUrl)
+		v1.GET("/", Controllers.FetchAllUrl)
+		v1.GET("/:id", Controllers.FetchUrlLog )
 
 		// 	v1.PUT("/:id", updateUrl)
 		// 	v1.DELETE("/:id", deleteUrl)
@@ -18,3 +22,7 @@ func Router() {
 	}
 	router.Run()
 }
+
+
+
+

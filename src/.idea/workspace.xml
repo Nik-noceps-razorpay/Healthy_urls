@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6aeb3eb-9ca2-4878-a008-aece2c955856" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Models/Url.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/UrlHits.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Routes/routes.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/HitsController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/UrlController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db_connection.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/Routes/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/DbConn/db_connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/context.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/context.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/gin.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/gin.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/ginS/gins.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/ginS/gins.go" afterDir="false" />
@@ -14,6 +17,12 @@
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/routes_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/routes_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/tree.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/tree.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/github.com/gin-gonic/gin/tree_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/gin-gonic/gin/tree_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/go-sql-driver/mysql" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/go-sql-driver/mysql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/go-sql-driver/mysql/dsn.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/go-sql-driver/mysql/dsn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/go-sql-driver/mysql/packets.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/go-sql-driver/mysql/packets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/jinzhu/gorm" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/jinzhu/gorm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github.com/jinzhu/gorm/dialects/mssql/mssql.go" beforeDir="false" afterPath="$PROJECT_DIR$/github.com/jinzhu/gorm/dialects/mssql/mssql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1" beforeDir="false" afterPath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/gin.go" beforeDir="false" afterPath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/gin.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/ginS/gins.go" beforeDir="false" afterPath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/ginS/gins.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/routergroup.go" beforeDir="false" afterPath="$PROJECT_DIR$/gopkg.in/gin-gonic/gin.v1/routergroup.go" afterDir="false" />
@@ -29,22 +38,58 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db_connection.go">
+        <entry file="file://$PROJECT_DIR$/DbConn/db_connection.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="90" column="14" lean-forward="true" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="14" />
+            <state relative-caret-position="315">
+              <caret line="21" column="11" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="11" />
               <folding>
-                <element signature="e#14#264#0" expanded="true" />
+                <element signature="e#16#220#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#14#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Routes/routes.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+              <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controllers/HitsController.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
+              <folding>
+                <element signature="e#21#185#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Controllers/UrlController.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+              <folding>
+                <element signature="e#21#96#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Models/UrlHits.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="225">
+              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -88,18 +133,15 @@
         <option value="$PROJECT_DIR$/route.go" />
         <option value="$PROJECT_DIR$/routes/route.go" />
         <option value="$PROJECT_DIR$/routes/routes.go" />
-        <option value="$PROJECT_DIR$/db_connection.go" />
+        <option value="$PROJECT_DIR$/Controllers/UrlContoller.go" />
         <option value="$PROJECT_DIR$/Routes/routes.go" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/src.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/Database/connection.go" />
+        <option value="$PROJECT_DIR$/db_connection.go" />
+        <option value="$PROJECT_DIR$/Database/db_connection.go" />
+        <option value="$PROJECT_DIR$/Controllers/UrlController.go" />
+        <option value="$PROJECT_DIR$/Controllers/HitsController.go" />
+        <option value="$PROJECT_DIR$/DbConn/db_connection.go" />
+        <option value="$PROJECT_DIR$/Server/main.go" />
       </list>
     </option>
   </component>
@@ -124,12 +166,17 @@
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="DbConn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Routes" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -139,6 +186,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
@@ -150,6 +198,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Database" />
       <recent name="$PROJECT_DIR$/routes" />
     </key>
   </component>
@@ -165,21 +214,36 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="src" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/Server/main.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" weight="0.30240965" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -194,10 +258,41 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Models/UrlHits.go">
+    <entry file="file://$PROJECT_DIR$/routes/route.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/github.com/jinzhu/gorm/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="820" selection-start-line="820" selection-end-line="820" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/connection.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Routes/routes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controllers/UrlController.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding>
+            <element signature="e#21#96#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -208,27 +303,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/route.go">
+    <entry file="file://$PROJECT_DIR$/Models/UrlHits.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="225">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db_connection.go">
+    <entry file="file://$PROJECT_DIR$/DbConn/db_connection.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="90" column="14" lean-forward="true" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="14" />
+        <state relative-caret-position="315">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="11" />
           <folding>
-            <element signature="e#14#264#0" expanded="true" />
+            <element signature="e#16#220#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routes/routes.go">
+    <entry file="file://$PROJECT_DIR$/Controllers/HitsController.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+          <folding>
+            <element signature="e#21#185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#14#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

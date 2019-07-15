@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	//"net/url"
 	"sync"
 	"time"
 
@@ -75,8 +76,8 @@ func main() {
 	{
 		v1.POST("/", createUrl)
 		v1.GET("/", fetchAllUrl)
+		v1.GET("/:id", fetchUrlLog)
 
-		// 	v1.GET("/:id", fetchSingleUrl)
 		// 	v1.PUT("/:id", updateUrl)
 		// 	v1.DELETE("/:id", deleteUrl)
 
@@ -93,12 +94,31 @@ func createUrl(c *gin.Context) {
 	var x []Url
 	c.Bind(&x)
 
-	fmt.Println(x)
-	fmt.Println("\n\n")
+	//fmt.Println(x)
+	//fmt.Println("\n\n")
 	for i := 0; i < len(x); i++ {
-		db.Save(&x[i])
-		fmt.Println("inserting data into table Url ")
-		c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Url added successfully!"})
+		var count int
+		var u Url
+
+		db.Model(&Url{}).Where("url_name = ?",x[i].UrlName).Count(&count)
+		if count !=0 {
+
+			db.Where("url_name= ?",x[i].UrlName).First(&u)
+
+			u.Frequency = x[i].Frequency
+			u.Crawl_timeout = x[i].Crawl_timeout
+			u.Failure_threshold = x[i].Failure_threshold
+
+			db.Save(&u)
+
+			fmt.Println("Url", u.UrlName, "has been updated")
+		} else {
+
+			db.Save(&x[i])
+			fmt.Println("inserting data into table Url ")
+
+			c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Url added successfully!"})
+		}
 	}
 
 }
@@ -123,6 +143,9 @@ func fetchAllUrl(c *gin.Context) {
 
 }
 
+
+// -------------------------------------------------- concurrent health checkups of urls --------------------------------------------------
+
 func healthCheckUp() {
 	var urls []Url
 
@@ -140,6 +163,9 @@ func healthCheckUp() {
 
 
 }
+
+
+//-------------------------------------------------- updates status of health checkups to the url_hits table ------------------------------
 
 func pingUrl(url Url) {
 	defer wg.Done()
@@ -189,6 +215,16 @@ func pingUrl(url Url) {
 	}
 }
 
+
+func fetchUrlLog(url Url) {
+
+	var hist UrlHits
+
+	hist = db.Model(&UrlHits{}).Where("url_name = ?", url.UrlName)
+
+
+
+}
 
 
 

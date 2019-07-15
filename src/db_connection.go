@@ -1,6 +1,8 @@
 package main
 
 import (
+	"Models"
+	"Routes"
 	"net/http"
 	//"net/url"
 	"sync"
@@ -12,29 +14,30 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/robfig/cron"
-
+	_ "./Models"
+	_ "./Routes"
 
 )
 
 var wg sync.WaitGroup
 
 //-------------------------------------------------------- Structs for database tables -----------------------------------------------------------------------
-type Url struct {
-	gorm.Model
-	UrlName           string `gorm:"unique;not null" json:"url_name"`
-	Crawl_timeout     int    `json:"crawl_timeout`
-	Frequency         int    `json:frequency`
-	Failure_threshold int    `json:failure_threshold`
-	Health            int    `gorm:"default:2"`
-}
-
-
-type UrlHits struct {
-	gorm.Model
-	Hit_number int
-	Status int
-	UrlId uint
-}
+//type Url struct {
+//	gorm.Model
+//	UrlName           string `gorm:"unique;not null" json:"url_name"`
+//	Crawl_timeout     int    `json:"crawl_timeout`
+//	Frequency         int    `json:frequency`
+//	Failure_threshold int    `json:failure_threshold`
+//	Health            int    `gorm:"default:2"`
+//}
+//
+//
+//type UrlHits struct {
+//	gorm.Model
+//	Hit_number int
+//	Status int
+//	UrlId uint
+//}
 
 //-------------------------------------------------------------- Migrating tables ---------------------------------------------------------------------
 
@@ -55,10 +58,10 @@ func init() {
 	//Migrate the schema
 
 	fmt.Println("Creating URL table ")
-	db.AutoMigrate(&Url{})
+	db.AutoMigrate(&Models.Url{})
 
 	// fmt.Println("Creating UrlHits table")
-	db.AutoMigrate(&UrlHits{})
+	db.AutoMigrate(&Models.UrlHits{})
 
 	c := cron.New()
 	c.AddFunc("*/1 * * * *", healthCheckUp)
@@ -66,23 +69,28 @@ func init() {
 
 }
 
-// ------------------------------------------------------------ setting up routes ----------------------------------------------------------------------
+// ------------------------------------------------------------ setting up Routes ----------------------------------------------------------------------
 func main() {
 	defer db.Close()
 
-	router := gin.Default()
+	//router := gin.Default()
+	//
+	//v1 := router.Group("/CRUD")
+	//{
+	//	v1.POST("/", createUrl)
+	//	v1.GET("/", fetchAllUrl)
+	//	v1.GET("/:id", fetchUrlLog)
+	//
+	//	// 	v1.PUT("/:id", updateUrl)
+	//	// 	v1.DELETE("/:id", deleteUrl)
+	//
+	//}
+	//router.Run()
 
-	v1 := router.Group("/CRUD")
-	{
-		v1.POST("/", createUrl)
-		v1.GET("/", fetchAllUrl)
-		v1.GET("/:id", fetchUrlLog)
 
-		// 	v1.PUT("/:id", updateUrl)
-		// 	v1.DELETE("/:id", deleteUrl)
+	Routes.Router()
 
-	}
-	router.Run()
+
 
 	fmt.Println("Connected to database")
 }
@@ -91,16 +99,16 @@ func main() {
 // createUrl add new row in url_health table
 
 func createUrl(c *gin.Context) {
-	var x []Url
+	var x []Models.Url
 	c.Bind(&x)
 
 	//fmt.Println(x)
 	//fmt.Println("\n\n")
 	for i := 0; i < len(x); i++ {
 		var count int
-		var u Url
+		var u Models.Url
 
-		db.Model(&Url{}).Where("url_name = ?",x[i].UrlName).Count(&count)
+		db.Model(&Models.Url{}).Where("url_name = ?",x[i].UrlName).Count(&count)
 		if count !=0 {
 
 			db.Where("url_name= ?",x[i].UrlName).First(&u)
@@ -128,7 +136,7 @@ func createUrl(c *gin.Context) {
 // fetchAllTodo fetch all todos
 
 func fetchAllUrl(c *gin.Context) {
-	var urls []Url
+	var urls []Models.Url
 
 	db.Find(&urls)
 
@@ -147,7 +155,7 @@ func fetchAllUrl(c *gin.Context) {
 // -------------------------------------------------- concurrent health checkups of urls --------------------------------------------------
 
 func healthCheckUp() {
-	var urls []Url
+	var urls []Models.Url
 
 	db.Find(&urls)
 
@@ -167,13 +175,13 @@ func healthCheckUp() {
 
 //-------------------------------------------------- updates status of health checkups to the url_hits table ------------------------------
 
-func pingUrl(url Url) {
+func pingUrl(url Models.Url) {
 	defer wg.Done()
 
 
 	for i := 0; i < url.Failure_threshold ; i++ {
 
-		var hit UrlHits
+		var hit Models.UrlHits
 
 		hit.UrlId = url.ID
 		hit.Hit_number = i + 1
@@ -216,13 +224,25 @@ func pingUrl(url Url) {
 }
 
 
-func fetchUrlLog(url Url) {
+// --------------------------------------------- get hit log for given url id ------------------------------------------------------
 
-	var hist UrlHits
+func fetchUrlLog(c *gin.Context) {
 
-	hist = db.Model(&UrlHits{}).Where("url_name = ?", url.UrlName)
+	id := c.Param("id")
 
+	var u []Models.Url
 
+	db.Model(&Models.Url{}).Where("id = ?", id).First(&u)
+
+	var hist []Models.UrlHits
+
+	db.Model(&Models.UrlHits{}).Where("url_id = ?", u[0].ID).Order("hit_number").Find(&hist)
+
+	for i := 0; i < len(hist) ; i++ {
+
+		fmt.Println(hist[i])
+
+	}
 
 }
 

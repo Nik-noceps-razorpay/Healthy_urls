@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	// "strconv"
+	"sync"
 	"time"
 
 	"fmt"
@@ -11,6 +11,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
+
+var wg sync.WaitGroup
 
 //-------------------------------------------------------- Structs for database tables -----------------------------------------------------------------------
 type Url struct {
@@ -22,10 +24,12 @@ type Url struct {
 	Health            int    `gorm:"default:2"`
 }
 
+
 type UrlHits struct {
 	gorm.Model
 	Hit_number int
 	Status int
+	UrlId uint
 }
 
 //-------------------------------------------------------------- Migrating tables ---------------------------------------------------------------------
@@ -50,7 +54,8 @@ func init() {
 	db.AutoMigrate(&Url{})
 
 	// fmt.Println("Creating UrlHits table")
-	// db.AutoMigrate(&UrlHits{})
+	db.AutoMigrate(&UrlHits{})
+
 
 }
 
@@ -64,6 +69,7 @@ func main() {
 	{
 		v1.POST("/", createUrl)
 		v1.GET("/", fetchAllUrl)
+		v1.GET("/healthcheckups", healthCheckUp)
 
 		// 	v1.GET("/:id", fetchSingleUrl)
 		// 	v1.PUT("/:id", updateUrl)
@@ -106,32 +112,77 @@ func fetchAllUrl(c *gin.Context) {
 		return
 	}
 	for i := 0 ; i < len(urls) ; i++ {
-		fmt.Println("Checking for url :", urls[i].UrlName)
-
-		timeout := time.Duration(100 * time.Second)
-		client := http.Client {
-			Timeout: timeout,
-		}
-		resp, err := client.Get(urls[i].UrlName)
-
-		if err != nil {
-			fmt.Println(err)
-			fmt.Println("url is unhealthy")
-		} else {
-			fmt.Println(resp.StatusCode, resp.Status)
-			if resp.StatusCode == 200 {
-				fmt.Println("chalrela hai")
-				fmt.Println(resp.Status)
-			} else {
-				fmt.Println("nahi chalrela hai")
-			}
-
-		}
+		fmt.Println("urls are :", urls[i] )
 
 	}
 
 }
 
+func healthCheckUp(c *gin.Context) {
+	var urls []Url
+
+	db.Find(&urls)
+
+	if len(urls) <= 0 {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No urls found!, kindly insert some urls."})
+		return
+	}
+	wg.Add(len(urls))
+	for i := 0 ; i < len(urls) ; i++ {
+
+		go pingUrl(urls[i])
+	}
+
+
+}
+
+func pingUrl(url Url) {
+	defer wg.Done()
+
+
+	for i := 0; i < url.Failure_threshold ; i++ {
+
+		var hit UrlHits
+
+		hit.UrlId = url.ID
+		hit.Hit_number = i + 1
+
+		client := http.Client{
+			Timeout: time.Duration(url.Crawl_timeout) * time.Second,
+		}
+
+		resp, err := client.Get(url.UrlName)
+
+		if err != nil {
+			fmt.Println("Bhai error aarela hai, code dhang se dekh, error nichu likhela hai ")
+			fmt.Println(err)
+			hit.Status = 2
+			db.Save(&hit)
+			time.Sleep(time.Duration(url.Frequency) * time.Second)
+		} else {
+
+			if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+
+				fmt.Println("site to chalreli hai, database mai update karne ko bheja hai code ko, dekh lena")
+
+				hit.Status = 1
+
+				db.Save(&hit)
+
+				break
+
+			} else {
+
+				hit.Status = 0
+
+				db.Save(&hit)
+
+				time.Sleep(time.Duration(url.Frequency) * time.Second)
+			}
+
+		}
+	}
+}
 
 
 

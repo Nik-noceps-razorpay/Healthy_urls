@@ -1,9 +1,23 @@
 # healthy_urls
 project to recursively check healthy urls
 
+Create a small service to monitor the health of external urls.
+
+The system should accept a list of http/https urls and a crawl_timeout(seconds) and frequency(in seconds) and failure_threshold(count)
+
+crawl_timeout : System will wait for this much time before giving up on the url
+frequency : System will wait for this much time before retrying again.
+failure_threshold : count of retries possible for that url
+
+The system shall iterate over all the urls in the system and try to do a HTTP GET on the URL(wait for the crawl_timeout) seconds before giving up on the URL. 
+
+Implement a command line/API that takes a file containing the list of URLs to validate with above mentioned parameters and then run through them.
 
 
-# project in the src folder
+
+# Description of the code
+
+# Code in src folder
 
 Server folder contains main.go. 
 This file contains an init function that initializes the necessary tables. The table scheme is in the Models folder.

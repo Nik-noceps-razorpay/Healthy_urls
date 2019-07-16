@@ -1,0 +1,38 @@
+[
+  {
+    "url_name": "https://www.yahoo.com",
+    "crawl_timeout": 510,
+    "frequency": 20,
+    "failure_threshold": 200
+  },
+  {
+    "url_name": "https://www.flipkart.com",
+    "crawl_timeout": 40,
+    "frequency": 5,
+    "failure_threshold": 9
+  },
+  {
+    "url_name": "https://www.xyz.com",
+    "crawl_timeout": 15,
+    "frequency": 50,
+    "failure_threshold": 5
+  },
+  {
+    "url_name": "https://www.jfkdkgauighrwowdsa.com",
+    "crawl_timeout": 10,
+    "frequency": 7,
+    "failure_threshold": 6
+  },
+  {
+    "url_name": "https://www.torrent.com",
+    "crawl_timeout": 20,
+    "frequency": 10,
+    "failure_threshold": 10
+  },
+  {
+    "url_name": "https://www.amazon.com",
+    "crawl_timeout": 10,
+    "frequency": 10,
+    "failure_threshold": 10
+  }
+]

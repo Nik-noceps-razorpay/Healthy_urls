@@ -17,6 +17,7 @@ func init() {
 
 	//open a db connection
 
+	//  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-- recurring health checkup every minute the server is running --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 	c := cron.New()
 	c.AddFunc("*/1 * * * *", healthCheckUp)
@@ -27,7 +28,11 @@ func init() {
 // ------------------------------------------------------------ setting up Routes ----------------------------------------------------------------------
 func main() {
 
+	// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-- Initializing database --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 	DbConn.InitDB()
+
+	// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-- starting a server that accepts url via postman for regular health monitoring --xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 	Routes.Router()
 

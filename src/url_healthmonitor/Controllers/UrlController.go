@@ -37,6 +37,7 @@ func ReadUrl(c *gin.Context){
 		go Put(x[i])
 	}
 
+
 }
 
 func Put(x Models.Url) {
